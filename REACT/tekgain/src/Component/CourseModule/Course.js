@@ -4,6 +4,7 @@ import UpdateCourse from './UpdateCourse';
 import ViewCourse from './Viewcourse';
 import ViewFedbacktracking from './ViewFeedbacktracking';
 import Deactivate from './Deactivate';
+
 const Course=(data)=>{
     
     const [addCoursebtn,setaddCoursebtn]=useState(false);
@@ -14,50 +15,104 @@ const Course=(data)=>{
     console.log(data)
     const handleAddcourse=()=>{
         
-        setaddCoursebtn(!addCoursebtn)
-        setUpdateCoursebtn(false)
-        setViewCoursebtn(false)
-        setViewFeedbackbtn(false)
+        setaddCoursebtn((currentAddCourse)=>!currentAddCourse)
+        
+        {updateCoursebtn?setUpdateCoursebtn((currentUpdateCourse)=>!currentUpdateCourse):
+          setUpdateCoursebtn((currentUpdateCourse)=>currentUpdateCourse)}
+        
+          {viewCoursebtn?setViewCoursebtn((currentViewCourse)=>!currentViewCourse):
+            setViewCoursebtn((currentViewCourse)=>currentViewCourse)}
+          
+        {viewFeedBackbtn?setViewFeedbackbtn((currentViewFeedback)=>!currentViewFeedback):
+          setViewFeedbackbtn((currentViewFeedback)=>currentViewFeedback)}
+        
+        {deactivatebtn?setDeactivatebtn((currentDeactivateCures)=>!currentDeactivateCures)
+          :setDeactivatebtn((currentDeactivateCures)=>currentDeactivateCures)}
+        
        
        
     }
     const handleUpdatecourse=()=>{
        
-        setUpdateCoursebtn(!updateCoursebtn)
-        setaddCoursebtn(false)
-        setViewCoursebtn(false)
-        setDeactivatebtn(false)
-        setViewFeedbackbtn(false)
+        setUpdateCoursebtn((currentUpdateCourse)=>!currentUpdateCourse)
+        {addCoursebtn?
+          setaddCoursebtn((currentAddCourse)=>!currentAddCourse):
+          setaddCoursebtn((currentAddCourse)=>currentAddCourse)
+        }
+        {viewCoursebtn?setViewCoursebtn((currentViewCourse)=>!currentViewCourse):
+          setViewCoursebtn((currentViewCourse)=>currentViewCourse)}
+        
+        {viewFeedBackbtn?setViewFeedbackbtn((currentViewFeedback)=>!currentViewFeedback):setViewFeedbackbtn((currentViewFeedback)=>currentViewFeedback)}
+        
+        {deactivatebtn?setDeactivatebtn((currentDeactivateCures)=>!currentDeactivateCures)
+          :setDeactivatebtn((currentDeactivateCures)=>currentDeactivateCures)}
+        
+        
         
     }
 
     const handleViewcourse=()=>{
-      setViewCoursebtn(!viewCoursebtn)
-      setaddCoursebtn(false)
-      setUpdateCoursebtn(false)
-      setViewFeedbackbtn(false)
-      setDeactivatebtn(false)
+      setViewCoursebtn((currentViewCourse)=>!currentViewCourse)
+     
+      {addCoursebtn?
+        setaddCoursebtn((currentAddCourse)=>!currentAddCourse):
+        setaddCoursebtn((currentAddCourse)=>currentAddCourse)
+      }
+      {updateCoursebtn?setUpdateCoursebtn((currentUpdateCourse)=>!currentUpdateCourse):
+        setUpdateCoursebtn((currentUpdateCourse)=>currentUpdateCourse)}
+      
+      {viewFeedBackbtn?setViewFeedbackbtn((currentViewFeedback)=>!currentViewFeedback):
+        setViewFeedbackbtn((currentViewFeedback)=>currentViewFeedback)}
+      
+      {deactivatebtn?setDeactivatebtn((currentDeactivateCures)=>!currentDeactivateCures)
+        :setDeactivatebtn((currentDeactivateCures)=>currentDeactivateCures)}
+      
     }
     const handleViewFeedBack=()=>{
-        setViewFeedbackbtn(!viewFeedBackbtn)
-        setViewCoursebtn(false)
-        setaddCoursebtn(false)
-        setUpdateCoursebtn(false)
-        setDeactivatebtn(false)
+      
+      setViewFeedbackbtn((currentDeactivateCures)=>!currentDeactivateCures)
+
+      {addCoursebtn?
+        setaddCoursebtn((currentAddCourse)=>!currentAddCourse):
+        setaddCoursebtn((currentAddCourse)=>currentAddCourse)
+      }
+      {updateCoursebtn?setUpdateCoursebtn((currentUpdateCourse)=>!currentUpdateCourse):
+        setUpdateCoursebtn((currentUpdateCourse)=>currentUpdateCourse)}
+
+      {viewCoursebtn?setViewCoursebtn((currentViewCourse)=>!currentViewCourse):
+        setViewCoursebtn((currentViewCourse)=>currentViewCourse)}
+        {deactivatebtn?setDeactivatebtn((currentDeactivateCures)=>!currentDeactivateCures)
+          :setDeactivatebtn((currentDeactivateCures)=>currentDeactivateCures)}
+        
+      
+      
   
       }
       const handleDeactivateCourse=()=>{
-        setDeactivatebtn(!deactivatebtn)
-        setViewFeedbackbtn(false)
-        setViewCoursebtn(false)
-        setaddCoursebtn(false)
-        setUpdateCoursebtn(false)
+        
+       
+        setDeactivatebtn((currentDeactivateCures)=>!currentDeactivateCures)
+        {addCoursebtn?
+          setaddCoursebtn((currentAddCourse)=>!currentAddCourse):
+          setaddCoursebtn((currentAddCourse)=>currentAddCourse)
+        }
+        {updateCoursebtn?setUpdateCoursebtn((currentUpdateCourse)=>!currentUpdateCourse):
+          setUpdateCoursebtn((currentUpdateCourse)=>currentUpdateCourse)}
+  
+        {viewCoursebtn?setViewCoursebtn((currentViewCourse)=>!currentViewCourse):
+          setViewCoursebtn((currentViewCourse)=>currentViewCourse)}
+          {viewFeedBackbtn?setViewFeedbackbtn((currentViewFeedback)=>!currentViewFeedback):
+            setViewFeedbackbtn((currentViewFeedback)=>currentViewFeedback)}
+  
+                
+        
       }
     return(
     
     
     <div class="bg-secondary">
      <h2 class="text-info fs-3 p-2">COURSE INFORMATION</h2>
+     
      <button class="btn btn-warning text-light" onClick={handleAddcourse}>Addcourse</button>
      
      &nbsp;
@@ -69,11 +124,11 @@ const Course=(data)=>{
      &nbsp;
      <button class="btn btn-warning text-light" onClick={handleDeactivateCourse}>Course Deactivate</button>
 
-     {addCoursebtn?<><Addcourse/></>:<></>}
-     {updateCoursebtn?<><UpdateCourse/></>:<></>}
-     {viewCoursebtn?<><ViewCourse/></>:<></>}
-     {viewFeedBackbtn?<><ViewFedbacktracking/></>:<></>}
-     {deactivatebtn?<><Deactivate/></>:<></>}
+     {addCoursebtn&&<Addcourse/>}
+     {updateCoursebtn&&<UpdateCourse/>}
+     {viewCoursebtn&&<ViewCourse/>}
+     {viewFeedBackbtn&&<ViewFedbacktracking/>}
+     {deactivatebtn&&<Deactivate/>}
     </div>
     
     

@@ -8,26 +8,8 @@ import Admission from '../AdmissionModule/Admission';
 const Navbar=()=>{
     return(
         <>
-    {/* <nav class="navbar  bg-body-black">
-  <div class="container-fluid">
-    <a class="navbar-brand text-danger f-15">TekGain</a>
-    <div class="d-flex" >
-    <a href="#course">
-    <button class="btn p-1 m-1 bg-primary text-white" type="submit">Course</button>
-    </a>
    
-
     
-    <a href="#association">
-    <button class="btn p-1 m-1 bg-primary text-white" type="submit">Association</button>
-    </a>
-    <a href="#admission">
-    <button class="btn p-1 m-1 bg-primary text-white" type="submit">Admission</button>
-    </a>
-    </div>
-    
-  </div>
-</nav> */}
 <>
 <Router>
       <div>

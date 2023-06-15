@@ -1,4 +1,5 @@
 import React,{useState} from "react"
+import "./deactive.module.css";
 const Deactivate=()=>{
     const initialValues={
         courseId:""
@@ -14,15 +15,17 @@ const Deactivate=()=>{
        setCourseDeactivate(initialValues)
     }
     return(
-        <div>
-        <h3 class="text-light fs-3 ">Course Deactivate</h3>
+        <div class="App">
+        <h3 class="text-light fs-3 m-2 ">Course Deactivate</h3>
         <form onSubmit={handleSubmit}>
-               <div class="border d-inline-block  bg-white p-2 mb-2">
-               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="form-label">Course Id : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text"  class="" name="courseId" value={courseDeactivate.courseId} onChange={handleChange}/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <div className="divtag">
+                <div className="div">
+               <label className="label">Course Id : </label>
+               <input type="text"  class="" name="courseId" value={courseDeactivate.courseId} onChange={handleChange}/> 
+                </div>
                 </div>
                 <br/>
-                <button class="btn btn-danger">Deactivate Course</button>
+                <button class="btn btn-danger m-2">Deactivate Course</button>
         </form>
 
      </div>

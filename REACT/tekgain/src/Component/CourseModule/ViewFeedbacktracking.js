@@ -1,4 +1,5 @@
 import react,{useState} from 'react';
+import './viewFeedbacktracking.module.css'
 const ViewFedbacktracking=()=>{
     const initialValues={
         courseId:""
@@ -14,15 +15,17 @@ const ViewFedbacktracking=()=>{
     }
     return(
      
-        <div>
-        <h3 class="text-light fs-3">Course FeedBack Rating</h3>
+        <div className="main">
+        <h3 class="text-light fs-3 m-2">Course FeedBack Rating</h3>
         <form onSubmit={handleSubmit}>
-               <div class="border d-inline-block  bg-white p-2 mb-2">
-               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="form-label">Course Id : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text"  class="" name="courseId" value={viewFeedBack.courseId} onChange={handleChange}/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <div class="divtag">
+               <div class="div">
+              <label class="label">Course Id : </label>
+                <input type="text"  class="" name="courseId" value={viewFeedBack.courseId} onChange={handleChange}/> 
+                </div>
                 </div>
                 <br/>
-                <button class="btn btn-danger">Submit</button>
+                <button class="btn btn-danger m-2">Submit</button>
         </form>
 
      </div>

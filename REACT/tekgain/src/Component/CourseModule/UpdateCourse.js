@@ -1,4 +1,5 @@
 import react ,{useState} from 'react';
+import './update.module.css';
 const UpdateCourse=()=>{
     const initialValues={
         courseId:"",
@@ -16,21 +17,25 @@ const UpdateCourse=()=>{
     }
     
     return(
-     <div class="">
-        <h1>Update Course Fee</h1>
+     <div className="main">
+        <h3 class="text-light fs-3 p-2 m-2">Update Course Fee</h3>
         <form onSubmit={handleSubmit}>
-           
-            <div class="border d-inline-block  bg-white p-2 mb-2">
-               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="form-label">Course Id : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text"  class="" name="courseId" value={updateCourse.courseId} onChange={handleChange}/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <div className='divtag'>
+            <div className="div">
+             <label class="label">Course Id : </label>
+                <input type="text"  class="" name="courseId" value={updateCourse.courseId} 
+                onChange={handleChange}/>
+                </div>
                 </div>
                 <br/>
-                <div class="border d-inline-block bg-white p-2 mb-2">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="form-label">Update Fee:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text"  name="updateFee" value={updateCourse.updateFee} onChange={handleChange}/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div className='divtag'>
+            <div className="div">
+             <label class="label">Update Fee:</label>
+                <input type="text"  name="updateFee" value={updateCourse.updateFee} onChange={handleChange}/> 
+                </div>
                 </div>
                 <br/>
-            <button class="btn btn-danger">Update Course</button>
+            <button class="btn btn-danger m-2">Update Course</button>
         </form>
 
      </div>

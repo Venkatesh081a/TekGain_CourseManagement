@@ -1,11 +1,12 @@
 .App {
   text-align: center;
-  background-color:whitesmoke;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  
+
+  
+ 
 }
+
 
 .App-logo {
   height: 40vmin;
@@ -17,6 +18,29 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
+
+.divtag{
+  display: inline-block;
+  width:600px;
+  height:60px;
+  border: 1px solid black;
+  background-color: white;
+  margin:5px;
+  font-size:20px;
+  
+  
+}
+.div{
+  margin-top: 10px;;
+}
+.label{
+  padding-right: 10px;
+  gap:15px;
+}
+ 
+
+
 
 .App-header {
   background-color: #282c34;

@@ -1,4 +1,5 @@
 import react,{useState} from 'react';
+import './viewcourse.module.css'
 const ViewCourse=()=>{
     const initialValues={
         courseId:""
@@ -13,15 +14,19 @@ const ViewCourse=()=>{
        setViewCourse(initialValues)
     }
     return(
-     <div>
-        <h3 class="text-light fs-3">View Course By Id</h3>
+     <div className='main'>
+        <h3 class="text-light fs-3 m-2">View Course By Id</h3>
         <form onSubmit={handleSubmit}>
-               <div class="border d-inline-block  bg-white p-2 mb-2">
-               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="form-label">Course Id : </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text"  class="" name="courseId" value={ViewCourse.courseId} onChange={handleChange}/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div className='divtag'>
+               <div className="div">
+               <label class="label">Course Id : </label>
+               
+                <input type="text"  class="" name="courseId" value={ViewCourse.courseId} 
+                onChange={handleChange}/> 
+                </div>
                 </div>
                 <br/>
-                <button class="btn btn-danger">View Course</button>
+                <button class="btn btn-danger m-2">View Course</button>
         </form>
 
      </div>
