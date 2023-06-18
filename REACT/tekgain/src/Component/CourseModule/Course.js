@@ -1,4 +1,4 @@
-import react,{useState} from 'react';
+import React,{useState} from 'react';
 import Addcourse from './Addcourse';
 import UpdateCourse from './UpdateCourse';
 import ViewCourse from './Viewcourse';
@@ -17,72 +17,59 @@ const Course=(data)=>{
         
         setaddCoursebtn((currentAddCourse)=>!currentAddCourse)
         
-        {updateCoursebtn?setUpdateCoursebtn((currentUpdateCourse)=>!currentUpdateCourse):
-          setUpdateCoursebtn((currentUpdateCourse)=>currentUpdateCourse)}
-        
-          {viewCoursebtn?setViewCoursebtn((currentViewCourse)=>!currentViewCourse):
-            setViewCoursebtn((currentViewCourse)=>currentViewCourse)}
+        updateCoursebtn&&setUpdateCoursebtn((currentUpdateCourse)=>!currentUpdateCourse)
           
-        {viewFeedBackbtn?setViewFeedbackbtn((currentViewFeedback)=>!currentViewFeedback):
-          setViewFeedbackbtn((currentViewFeedback)=>currentViewFeedback)}
+          viewCoursebtn&&setViewCoursebtn((currentViewCourse)=>!currentViewCourse)
+            
+          
+        viewFeedBackbtn&&setViewFeedbackbtn((currentViewFeedback)=>!currentViewFeedback)
+          
         
-        {deactivatebtn?setDeactivatebtn((currentDeactivateCures)=>!currentDeactivateCures)
-          :setDeactivatebtn((currentDeactivateCures)=>currentDeactivateCures)}
-        
+        deactivatebtn&&setDeactivatebtn((currentDeactivateCures)=>!currentDeactivateCures)
+                 
        
        
     }
     const handleUpdatecourse=()=>{
        
         setUpdateCoursebtn((currentUpdateCourse)=>!currentUpdateCourse)
-        {addCoursebtn?
-          setaddCoursebtn((currentAddCourse)=>!currentAddCourse):
-          setaddCoursebtn((currentAddCourse)=>currentAddCourse)
-        }
-        {viewCoursebtn?setViewCoursebtn((currentViewCourse)=>!currentViewCourse):
-          setViewCoursebtn((currentViewCourse)=>currentViewCourse)}
+        addCoursebtn&&
+          setaddCoursebtn((currentAddCourse)=>!currentAddCourse)
+          
+        viewCoursebtn&&setViewCoursebtn((currentViewCourse)=>!currentViewCourse)
         
-        {viewFeedBackbtn?setViewFeedbackbtn((currentViewFeedback)=>!currentViewFeedback):setViewFeedbackbtn((currentViewFeedback)=>currentViewFeedback)}
+        viewFeedBackbtn&&setViewFeedbackbtn((currentViewFeedback)=>!currentViewFeedback)
         
-        {deactivatebtn?setDeactivatebtn((currentDeactivateCures)=>!currentDeactivateCures)
-          :setDeactivatebtn((currentDeactivateCures)=>currentDeactivateCures)}
-        
-        
-        
-    }
+        deactivatebtn&&setDeactivatebtn((currentDeactivateCures)=>!currentDeactivateCures)
+      }
 
     const handleViewcourse=()=>{
       setViewCoursebtn((currentViewCourse)=>!currentViewCourse)
      
-      {addCoursebtn?
-        setaddCoursebtn((currentAddCourse)=>!currentAddCourse):
-        setaddCoursebtn((currentAddCourse)=>currentAddCourse)
-      }
-      {updateCoursebtn?setUpdateCoursebtn((currentUpdateCourse)=>!currentUpdateCourse):
-        setUpdateCoursebtn((currentUpdateCourse)=>currentUpdateCourse)}
+      addCoursebtn&&setaddCoursebtn((currentAddCourse)=>!currentAddCourse)
+        
+      updateCoursebtn&&setUpdateCoursebtn((currentUpdateCourse)=>!currentUpdateCourse)
+        
+    viewFeedBackbtn&&setViewFeedbackbtn((currentViewFeedback)=>!currentViewFeedback)
       
-      {viewFeedBackbtn?setViewFeedbackbtn((currentViewFeedback)=>!currentViewFeedback):
-        setViewFeedbackbtn((currentViewFeedback)=>currentViewFeedback)}
-      
-      {deactivatebtn?setDeactivatebtn((currentDeactivateCures)=>!currentDeactivateCures)
-        :setDeactivatebtn((currentDeactivateCures)=>currentDeactivateCures)}
+      deactivatebtn&&setDeactivatebtn((currentDeactivateCures)=>!currentDeactivateCures)
+        
       
     }
     const handleViewFeedBack=()=>{
       
       setViewFeedbackbtn((currentDeactivateCures)=>!currentDeactivateCures)
 
-      {addCoursebtn?
-        setaddCoursebtn((currentAddCourse)=>!currentAddCourse):
-        setaddCoursebtn((currentAddCourse)=>currentAddCourse)
-      }
-      {updateCoursebtn?setUpdateCoursebtn((currentUpdateCourse)=>!currentUpdateCourse):
-        setUpdateCoursebtn((currentUpdateCourse)=>currentUpdateCourse)}
+      addCoursebtn&&
+        setaddCoursebtn((currentAddCourse)=>!currentAddCourse);
+       
+      updateCoursebtn&&setUpdateCoursebtn((currentUpdateCourse)=>!currentUpdateCourse)
+        
 
-      {viewCoursebtn?setViewCoursebtn((currentViewCourse)=>!currentViewCourse):
-        setViewCoursebtn((currentViewCourse)=>currentViewCourse)}
-        {deactivatebtn?setDeactivatebtn((currentDeactivateCures)=>!currentDeactivateCures)
-          :setDeactivatebtn((currentDeactivateCures)=>currentDeactivateCures)}
+      viewCoursebtn&&setViewCoursebtn((currentViewCourse)=>!currentViewCourse)
+       
+      deactivatebtn&&setDeactivatebtn((currentDeactivateCures)=>!currentDeactivateCures)
+          
         
       
       
@@ -92,18 +79,13 @@ const Course=(data)=>{
         
        
         setDeactivatebtn((currentDeactivateCures)=>!currentDeactivateCures)
-        {addCoursebtn?
-          setaddCoursebtn((currentAddCourse)=>!currentAddCourse):
-          setaddCoursebtn((currentAddCourse)=>currentAddCourse)
-        }
-        {updateCoursebtn?setUpdateCoursebtn((currentUpdateCourse)=>!currentUpdateCourse):
-          setUpdateCoursebtn((currentUpdateCourse)=>currentUpdateCourse)}
+        addCoursebtn&&
+          setaddCoursebtn((currentAddCourse)=>!currentAddCourse)
+        
+        updateCoursebtn&&setUpdateCoursebtn((currentUpdateCourse)=>!currentUpdateCourse)
   
-        {viewCoursebtn?setViewCoursebtn((currentViewCourse)=>!currentViewCourse):
-          setViewCoursebtn((currentViewCourse)=>currentViewCourse)}
-          {viewFeedBackbtn?setViewFeedbackbtn((currentViewFeedback)=>!currentViewFeedback):
-            setViewFeedbackbtn((currentViewFeedback)=>currentViewFeedback)}
-  
+        viewCoursebtn&&setViewCoursebtn((currentViewCourse)=>!currentViewCourse)
+        viewFeedBackbtn&&setViewFeedbackbtn((currentViewFeedback)=>!currentViewFeedback)
                 
         
       }

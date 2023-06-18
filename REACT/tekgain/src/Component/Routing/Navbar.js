@@ -12,7 +12,7 @@ const Navbar=()=>{
     
 <>
 <Router>
-      <div>
+      <div class="text-center">
         <nav class="navbar navbar-expand-lg bg-dark ">
         <div class="container-fluid">
     <a class="navbar-brand text-danger fs-3" href="#">TekGain</a>

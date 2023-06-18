@@ -1,5 +1,5 @@
 import react,{useState} from 'react';
-import './viewFeedbacktracking.module.css'
+//import './ViewFeedbacktracking.modules.css'
 const ViewFedbacktracking=()=>{
     const initialValues={
         courseId:""
@@ -10,6 +10,7 @@ const ViewFedbacktracking=()=>{
     }
     const handleSubmit=(e)=>{
        e.preventDefault();
+       if(!viewFeedBack.courseId) return ;
        console.log(viewFeedBack)
        setViewFeedback(initialValues)
     }
@@ -18,11 +19,11 @@ const ViewFedbacktracking=()=>{
         <div className="main">
         <h3 class="text-light fs-3 m-2">Course FeedBack Rating</h3>
         <form onSubmit={handleSubmit}>
-               <div class="divtag">
+              
                <div class="div">
               <label class="label">Course Id : </label>
                 <input type="text"  class="" name="courseId" value={viewFeedBack.courseId} onChange={handleChange}/> 
-                </div>
+                
                 </div>
                 <br/>
                 <button class="btn btn-danger m-2">Submit</button>
