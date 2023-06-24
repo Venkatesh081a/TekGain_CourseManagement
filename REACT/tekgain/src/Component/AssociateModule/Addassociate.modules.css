@@ -1,4 +1,4 @@
-.div-ele {
+.input-ele {
   display: inline-flex;
   justify-content: space-evenly;
   width: 700px;
@@ -9,9 +9,10 @@
   padding: 10px;
   margin: 10px;
 }
+
 .label {
-  padding-left: 80px;
+  padding-left: 100px;
 }
 .input-box {
-  margin-right: 50px;
+  margin-right: 80px;
 }
