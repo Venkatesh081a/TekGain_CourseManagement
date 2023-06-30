@@ -6,12 +6,14 @@ const Updateassociate = () => {
     updateEmailId: "",
   };
   const [updateAss, setUpdateAss] = useState(initialValues);
+  const [msg, setMsg] = useState("");
   const handleChange = (event) => {
     setUpdateAss({ ...updateAss, [event.target.name]: event.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!updateAss.associateId && !updateAss.updateEmailId) return;
+    setMsg("Associate emailId updated successfully");
     console.log(updateAss);
     setUpdateAss(initialValues);
   };
@@ -45,6 +47,7 @@ const Updateassociate = () => {
         <br />
 
         <button class="btn btn-danger m-2">Update EmailId</button>
+        <p className="msg">{msg}</p>
       </form>
     </div>
   );

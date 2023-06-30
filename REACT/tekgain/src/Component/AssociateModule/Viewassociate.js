@@ -33,6 +33,22 @@ const Viewassociate = () => {
 
         <button class="btn btn-danger m-2">Get Details</button>
       </form>
+      <div className="table-container">
+        <table className="table">
+          <tr>
+            <th>Associate Id</th>
+            <th>Associate Name</th>
+            <th>Associate EmailId</th>
+            <th>Associate Address</th>
+          </tr>
+          <tr>
+            <td>C102</td>
+            <td>Python</td>
+            <td>4</td>
+            <td>Full time</td>
+          </tr>
+        </table>
+      </div>
     </div>
   );
 };

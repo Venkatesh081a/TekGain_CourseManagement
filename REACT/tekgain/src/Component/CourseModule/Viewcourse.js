@@ -34,6 +34,26 @@ const ViewCourse = () => {
         <br />
         <button class="btn btn-danger m-2">View Course</button>
       </form>
+      <div className="table-container">
+        <table className="table">
+          <tr>
+            <th>Course Id</th>
+            <th>Course Name</th>
+            <th>Duration</th>
+            <th>Course Type</th>
+            <th>Fees</th>
+            <th>Rating</th>
+          </tr>
+          <tr>
+            <td>C102</td>
+            <td>Python</td>
+            <td>4</td>
+            <td>Full time</td>
+            <td>2000</td>
+            <td>4</td>
+          </tr>
+        </table>
+      </div>
     </div>
   );
 };

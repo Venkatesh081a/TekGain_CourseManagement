@@ -8,6 +8,8 @@ const Makepayment = () => {
     fee: "",
   };
   const [makePayment, setMakePayment] = useState(initialValues);
+  const [msg, setMsg] = useState("");
+
   const handleChange = (e) => {
     setMakePayment({ ...makePayment, [e.target.name]: e.target.value });
   };
@@ -19,6 +21,7 @@ const Makepayment = () => {
       !makePayment.associateId
     )
       return;
+    setMsg("Payment Successful");
     console.log(makePayment);
     setMakePayment(initialValues);
   };
@@ -71,6 +74,7 @@ const Makepayment = () => {
         </div>
         <br />
         <button class="btn btn-danger m-2">Pay Now</button>
+        <p className="msg">{msg}</p>
       </form>
     </div>
   );

@@ -12,6 +12,7 @@ const Addcourse = () => {
   };
 
   const [addUser, setAddUser] = useState(initialValues);
+  const [msg, setMsg] = useState("");
   const handleChange = (e) => {
     setAddUser({ ...addUser, [e.target.name]: e.target.value });
   };
@@ -27,6 +28,7 @@ const Addcourse = () => {
     )
       return;
     console.log(addUser);
+    setMsg("Course Added Successfully");
     setAddUser(initialValues);
   };
   return (
@@ -95,6 +97,7 @@ const Addcourse = () => {
 
         <br />
         <button class="btn btn-danger m-2">Add course</button>
+        <p className="msg">{msg}</p>
       </form>
     </div>
   );
