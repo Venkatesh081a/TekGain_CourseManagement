@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import "./HighestFeeDetails.modules.css";
+import Associate from "../AssociateModule/Associate";
 const HighestFeeDetails = () => {
   const initialValues = {
     associateId: "",
   };
   const [highestFee, setHighestFee] = useState(initialValues);
+  const [ishighest, setIShig] = useState(false);
   const handleChange = (e) => {
     setHighestFee({ ...highestFee, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!highestFee.associateId) return;
+    setIShig((currentHigh) => !currentHigh);
     console.log(highestFee);
     setHighestFee(initialValues);
   };
@@ -30,6 +33,18 @@ const HighestFeeDetails = () => {
         </div>
         <br />
         <button class="btn btn-danger m-2">Submit</button>
+        {ishighest && (
+          <div className="table-container">
+            <table className="table">
+              <tr>
+                <th>Course Id</th>
+              </tr>
+              <tr>
+                <td>C102</td>
+              </tr>
+            </table>
+          </div>
+        )}
       </form>
     </div>
   );

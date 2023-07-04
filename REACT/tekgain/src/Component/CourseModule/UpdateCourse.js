@@ -6,12 +6,14 @@ const UpdateCourse = () => {
     updateFee: "",
   };
   const [updateCourse, setUpdateCourse] = useState(initialValues);
+  const [msg, setMsg] = useState("");
   const handleChange = (e) => {
     setUpdateCourse({ ...updateCourse, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!updateCourse.courseId && !updateCourse.updateFee) return;
+    setMsg("Course Updated Successfully");
     console.log(updateCourse);
     setUpdateCourse(initialValues);
   };
@@ -45,6 +47,7 @@ const UpdateCourse = () => {
 
         <br />
         <button class="btn btn-danger m-2">Update Course</button>
+        <p className="msg">{msg}</p>
       </form>
     </div>
   );

@@ -30,6 +30,18 @@ const ViewFeedback = () => {
         </div>
         <br />
         <button class="btn btn-danger m-2">Get FeedBack</button>
+        <div className="table-container">
+          <table className="table">
+            <tr>
+              <th>Course Id</th>
+              <th>FeedBack</th>
+            </tr>
+            <tr>
+              <td>C102</td>
+              <td>Python</td>
+            </tr>
+          </table>
+        </div>
       </form>
     </div>
   );

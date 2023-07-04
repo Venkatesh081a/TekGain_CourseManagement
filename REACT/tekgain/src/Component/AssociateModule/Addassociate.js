@@ -8,6 +8,7 @@ const Addassociate = () => {
     emailId: "",
   };
   const [addAssociate, setAddAssociate] = useState(initialValues);
+  const [msg, setMsg] = useState("");
   const handleChange = (e) => {
     setAddAssociate({ ...addAssociate, [e.target.name]: e.target.value });
   };
@@ -20,6 +21,7 @@ const Addassociate = () => {
       !addAssociate.emailId
     )
       return;
+    setMsg("Associate has been added Successfully");
     console.log(addAssociate);
     setAddAssociate(initialValues);
   };
@@ -78,6 +80,7 @@ const Addassociate = () => {
 
         <br />
         <button class="btn btn-danger m-2">Add </button>
+        <p className="msg">{msg}</p>
       </form>
     </div>
   );

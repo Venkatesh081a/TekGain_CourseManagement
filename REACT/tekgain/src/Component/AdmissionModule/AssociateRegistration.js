@@ -6,12 +6,14 @@ const AssociateRegistration = () => {
     associateId: "",
   };
   const [asscoiatReg, setAssociateReg] = useState(initialValues);
+  const [msg, setMsg] = useState("");
   const handleChange = (e) => {
     setAssociateReg({ ...asscoiatReg, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!asscoiatReg.courseId && !asscoiatReg.associateId) return;
+    setMsg("Registered Successfully  your registration Id:");
     console.log(asscoiatReg);
     setAssociateReg(initialValues);
   };
@@ -43,6 +45,7 @@ const AssociateRegistration = () => {
           </div>
           <br />
           <button class="btn btn-danger m-2">Register Now</button>
+          <p className="msg">{msg}</p>
         </form>
       </div>
     </div>

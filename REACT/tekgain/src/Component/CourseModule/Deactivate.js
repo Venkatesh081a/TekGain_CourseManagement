@@ -5,6 +5,7 @@ const Deactivate = () => {
     courseId: "",
   };
   const [courseDeactivate, setCourseDeactivate] = useState(initialValues);
+  const [msg, setMsg] = useState("");
 
   const handleChange = (e) => {
     setCourseDeactivate({
@@ -15,6 +16,8 @@ const Deactivate = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!courseDeactivate.courseId) return;
+
+    setMsg(`Course ${courseDeactivate.courseId} Deactivated Successfully`);
     console.log(courseDeactivate);
     setCourseDeactivate(initialValues);
   };
@@ -34,6 +37,7 @@ const Deactivate = () => {
         </div>
         <br />
         <button class="btn btn-danger m-2">Deactivate Course</button>
+        <p className="msg">{msg}</p>
       </form>
     </div>
   );

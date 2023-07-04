@@ -30,6 +30,10 @@ const ViewFedbacktracking = () => {
         </div>
         <br />
         <button class="btn btn-danger m-2">Submit</button>
+        <div>
+          <h5 className="heading">Course Id:{viewFeedBack.courseId}</h5>
+          <h5 className="heading">FeedBack Rating:{viewFeedBack.courseId}</h5>
+        </div>
       </form>
     </div>
   );

@@ -7,6 +7,7 @@ const Addfeedback = () => {
     feedbackRating: "",
   };
   const [addFeedback, setAddFeedBack] = useState(initialValues);
+  const [msg, setMsg] = useState("");
   const handleChange = (e) => {
     setAddFeedBack({ ...addFeedback, [e.target.name]: e.target.value });
   };
@@ -18,6 +19,7 @@ const Addfeedback = () => {
       !addFeedback.feedbackRating
     )
       return;
+    setMsg("Feedback updated Successfully");
     console.log(addFeedback);
     setAddFeedBack(initialValues);
   };
@@ -59,6 +61,7 @@ const Addfeedback = () => {
         </div>
         <br />
         <button class="btn btn-danger m-2">Submit</button>
+        <p className="msg">{msg}</p>
       </form>
     </div>
   );
