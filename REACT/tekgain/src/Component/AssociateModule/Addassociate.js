@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./Addassociate.modules.css";
 const Addassociate = () => {
   const initialValues = {
@@ -9,10 +10,35 @@ const Addassociate = () => {
   };
   const [addAssociate, setAddAssociate] = useState(initialValues);
   const [msg, setMsg] = useState("");
+  const [isAddButtonClicked, setisAddButtonClicked] = useState(false);
   const handleChange = (e) => {
     setAddAssociate({ ...addAssociate, [e.target.name]: e.target.value });
   };
+  const handleClickAddButton = () => {
+    setisAddButtonClicked((currentState) => !currentState);
+  };
+  const addAssociateData = async (ADDASSOCIATE_URL) => {
+    console.log(addAssociate);
+    const post = {
+      associateName: addAssociate.name,
+      associateAddress: addAssociate.address,
+      associateEmailId: addAssociate.emailId,
+    };
+    try {
+      const response = await axios.post(ADDASSOCIATE_URL, post);
+      console.log(response.data);
+      if (response.data) {
+        //setMsg("Associate has been added Successfully");
+      }
+    } catch (e) {
+      setMsg("Something Went wrong");
+    }
+  };
   const handleSubmit = (e) => {
+    const ADDASSOCIATE_URL =
+      "http://localhost:9098/associate/registerAssociate";
+    addAssociateData(ADDASSOCIATE_URL);
+
     e.preventDefault();
     if (
       !addAssociate.associateId &&
@@ -22,6 +48,7 @@ const Addassociate = () => {
     )
       return;
     setMsg("Associate has been added Successfully");
+
     console.log(addAssociate);
     setAddAssociate(initialValues);
   };
@@ -79,8 +106,10 @@ const Addassociate = () => {
         <br />
 
         <br />
-        <button class="btn btn-danger m-2">Add </button>
-        <p className="msg">{msg}</p>
+        <button class="btn btn-danger m-2" onClick={handleClickAddButton}>
+          Add{" "}
+        </button>
+        {isAddButtonClicked && <p className="msg">{msg}</p>}
       </form>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./Deactive.modules.css";
 const Deactivate = () => {
   const initialValues = {
@@ -13,10 +14,21 @@ const Deactivate = () => {
       [e.target.name]: e.target.value,
     });
   };
+  const deactivateCourse = async (DEACTIVE_URL) => {
+    axios
+      .delete(DEACTIVE_URL)
+      .then((response) => {
+        console.log(response.status);
+      })
+      .catch((e) => console.log("something went wrong!", e));
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
+    const DEACTIVE_URL =
+      "http://localhost:9097/courses/course/deactivate/" +
+      courseDeactivate.courseId;
+    deactivateCourse(DEACTIVE_URL);
     if (!courseDeactivate.courseId) return;
-
     setMsg(`Course ${courseDeactivate.courseId} Deactivated Successfully`);
     console.log(courseDeactivate);
     setCourseDeactivate(initialValues);

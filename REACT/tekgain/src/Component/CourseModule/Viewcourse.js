@@ -1,16 +1,44 @@
 import React, { useState } from "react";
 import "./Viewcourse.modules.css";
+import axios from "axios";
 const ViewCourse = () => {
   const initialValues = {
     courseId: "",
   };
   const [ViewCourse, setViewCourse] = useState(initialValues);
+  const [initialViewCourse, setInitialViewCourse] = useState({
+    courseId: "",
+    courseName: "",
+    fees: "",
+    duration: "",
+    courseType: "",
+    rating: 0,
+  });
+  const [isViewCourseBtn, setIsViewCourseBtn] = useState(false);
 
   const handleChange = (e) => {
     setViewCourse({ ...ViewCourse, [e.target.name]: e.target.value });
   };
+  const handleClickViewCourse = () => {
+    setIsViewCourseBtn((currentState) => !currentState);
+  };
+  const getCourse = async (VIEWCOURSE_URL) => {
+    try {
+      const response = await axios.get(VIEWCOURSE_URL);
+      console.log(response.status);
+      let course = await response.data;
+      console.log("Course Data" + course.courseName);
+      setInitialViewCourse(course);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
+    const VIEWCOURSE_URL =
+      "http://localhost:9097/courses/course/viewByCourseId/" +
+      ViewCourse.courseId;
+    getCourse(VIEWCOURSE_URL);
     if (!ViewCourse.courseId) return;
     console.log(ViewCourse);
     setViewCourse(initialValues);
@@ -32,28 +60,32 @@ const ViewCourse = () => {
         </div>
 
         <br />
-        <button class="btn btn-danger m-2">View Course</button>
+        <button class="btn btn-danger m-2" onClick={handleClickViewCourse}>
+          View Course
+        </button>
       </form>
-      <div className="table-container">
-        <table className="table">
-          <tr>
-            <th>Course Id</th>
-            <th>Course Name</th>
-            <th>Duration</th>
-            <th>Course Type</th>
-            <th>Fees</th>
-            <th>Rating</th>
-          </tr>
-          <tr>
-            <td>C102</td>
-            <td>Python</td>
-            <td>4</td>
-            <td>Full time</td>
-            <td>2000</td>
-            <td>4</td>
-          </tr>
-        </table>
-      </div>
+      {isViewCourseBtn && (
+        <div className="table-container">
+          <table className="table">
+            <tr>
+              <th>Course Id</th>
+              <th>Course Name</th>
+              <th>Duration</th>
+              <th>Course Type</th>
+              <th>Fees</th>
+              <th>Rating</th>
+            </tr>
+            <tr>
+              <td>{initialViewCourse.courseId}</td>
+              <td>{initialViewCourse.courseName}</td>
+              <td>{initialViewCourse.duration}</td>
+              <td>{initialViewCourse.courseType}</td>
+              <td>{initialViewCourse.fees}</td>
+              <td>{initialViewCourse.rating}</td>
+            </tr>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./UpdateCourse.modules.css";
 const UpdateCourse = () => {
   const initialValues = {
@@ -10,8 +11,25 @@ const UpdateCourse = () => {
   const handleChange = (e) => {
     setUpdateCourse({ ...updateCourse, [e.target.name]: e.target.value });
   };
+  const upDateCourse = async (UPDATE_COURSE_URL) => {
+    axios
+      .put(UPDATE_COURSE_URL)
+      .then((response) => {
+        console.log("Status: ", response.status);
+        console.log("Data: ", response.data);
+      })
+      .catch((error) => {
+        console.error("Something went wrong!", error);
+      });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
+    const UPDATE_COURSE_URL =
+      "http://localhost:9097/courses/course/update/" +
+      updateCourse.courseId +
+      "/" +
+      updateCourse.updateFee;
+    upDateCourse(UPDATE_COURSE_URL);
     if (!updateCourse.courseId && !updateCourse.updateFee) return;
     setMsg("Course Updated Successfully");
     console.log(updateCourse);

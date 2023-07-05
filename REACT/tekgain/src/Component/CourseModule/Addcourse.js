@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 import "./Addcourse.modules.css";
 
@@ -16,9 +17,29 @@ const Addcourse = () => {
   const handleChange = (e) => {
     setAddUser({ ...addUser, [e.target.name]: e.target.value });
   };
+  const postAddCourse = async (ADDCOURSE_URL, post) => {
+    try {
+      const response = await axios.post(ADDCOURSE_URL, post);
+      console.log(response.data);
+      if (response.data) {
+        setMsg("Course has been added Successfully");
+      }
+    } catch (e) {
+      setMsg("Something Went Wrong,Please check it ");
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const ADDCOURSE_URL = "http://localhost:9097/courses/course/addCourse";
+    const post = {
+      courseName: addUser.courseName,
+      fees: addUser.fees,
+      duration: addUser.durationInMonths,
+      courseType: addUser.courseType,
+    };
+    postAddCourse(ADDCOURSE_URL, post);
+
     if (
       !addUser.courseId &&
       !addUser.courseName &&
@@ -28,7 +49,7 @@ const Addcourse = () => {
     )
       return;
     console.log(addUser);
-    setMsg("Course Added Successfully");
+    //setMsg("Course Added Successfully");
     setAddUser(initialValues);
   };
   return (
