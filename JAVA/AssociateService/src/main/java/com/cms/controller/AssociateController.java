@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
+
 import com.cms.exception.AssociateInvalidException;
 import com.cms.model.Associate;
 import com.cms.service.IAssociateService;
@@ -24,46 +26,38 @@ public class AssociateController {
 	
 	
 	@PostMapping("/associate/registerAssociate")
-	public ResponseEntity<Associate> addAssociate(@RequestBody Associate associate) throws AssociateInvalidException{
-		Associate addAssociate = associateService.addAssociate(associate);
+	public ResponseEntity<Associate> addAssociate(@RequestBody Associate associate) {
+		try{
+		 Associate addAssociate = associateService.addAssociate(associate); 
 		return ResponseEntity.ok(addAssociate);
-		
-//		try {
-//		 Associate addAssociate = associateService.addAssociate(associate);
-//		return ResponseEntity.ok(addAssociate);
-//		}
-//		catch(Exception e) {
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//		}
+		}
+		catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 		
 	}
 	
 	
 	@PutMapping("/associate/updateAssociateEmailId/{associateId}/{associateEmailId}")
-	public ResponseEntity<Associate> updateAssociate(@PathVariable String associateId, @PathVariable String associateEmailId) throws AssociateInvalidException{
-		Associate updateAssociate = associateService.updateAssociate(associateId, associateEmailId);
-		return ResponseEntity.ok(updateAssociate);
-//		try {
-//			Associate updateAssociate = associateService.updateAssociate(associateId,associateEmailId);
-//			return ResponseEntity.ok(updateAssociate);
-//		}catch(Exception e) {
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//		}
+	public ResponseEntity<Associate> updateAssociate(@PathVariable String associateId, @PathVariable String associateEmailId) {
+		try {
+			Associate updateAssociate = associateService.updateAssociate(associateId,associateEmailId);
+			return ResponseEntity.ok(updateAssociate);
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 		
 	}
 	
 	
 	@GetMapping("/associate/viewAssociate/{associateId}")
-	public ResponseEntity<Associate> viewByAssociateId(@PathVariable String associateId) throws AssociateInvalidException{
-		Associate viewByAssociateId = associateService.viewByAssociateId(associateId);
-		return ResponseEntity.ok(viewByAssociateId);
-		
-//		try {
-//			Associate viewByAssociateId =  associateService.viewByAssociateId(associateId);
-//			return ResponseEntity.ok(viewByAssociateId);
-//		}catch(Exception e) {
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//		}
+	public ResponseEntity<Associate> viewByAssociateId(@PathVariable String associateId) {
+		try {
+			Associate viewByAssociateId =  associateService.viewByAssociateId(associateId);
+			return ResponseEntity.ok(viewByAssociateId);
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 		
 	}
 	

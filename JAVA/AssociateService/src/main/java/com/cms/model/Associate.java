@@ -21,10 +21,11 @@ import javax.persistence.GeneratedValue;
 public class Associate {
 	
 	@Id         // generatedValue - is used to specify how the primary key values should be generated for an entity.
-	@GeneratedValue(strategy = GenerationType.AUTO)  
+	//@GeneratedValue(strategy = GenerationType.AUTO)  
 	private String associateId;	   // strategy - it specifies that the strategy to be used for generating the primary key values.
 	private String associateName;	
 	private String associateAddress;	
 	private String associateEmailId;
+
 
 }
