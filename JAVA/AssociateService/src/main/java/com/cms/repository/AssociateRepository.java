@@ -9,7 +9,7 @@ import com.cms.model.Associate;
 
 
 @Repository  
-public interface AssociateRepository  extends MongoRepository<Associate, Integer>{
+public interface AssociateRepository  extends MongoRepository<Associate, String>{
 
 	
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.cms.model.Admission;
 
 @Repository
-public interface AdmissionRepository extends MongoRepository<Admission, String> {
+public interface AdmissionRepository extends MongoRepository<Admission, Long> {
 	Admission findByRegistrationId(String registrationId);
 
 	int getFeesByCourseId(String courseId);
