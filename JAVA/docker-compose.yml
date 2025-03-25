@@ -1,0 +1,106 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    networks:
+      - microservices-net
+    restart: always
+
+  eureka-server:
+    build:
+      context: "./cms-registry-server"
+      dockerfile: Dockerfile
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-net
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761"]
+      interval: 10s
+      retries: 3
+    environment:
+      - SPRING_APPLICATION_NAME=service-registry
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
+      - EUREKA_CLIENT_FETCH_REGISTRY=false
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+
+  gateway-service:
+    build:
+      context: "./Gateway"
+      dockerfile: Dockerfile
+    container_name: gateway-service
+    ports:
+      - "9090:9090"
+    networks:
+      - microservices-net
+    depends_on:
+      - eureka-server
+    environment:
+      - SPRING_APPLICATION_NAME=GATEWAY
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+      - SPRING_CLOUD_DISCOVERY_ENABLED=true
+
+  course-service:
+    build:
+      context: "./CourseService"
+      dockerfile: Dockerfile
+    container_name: course-service
+    ports:
+      - "9097:9097"
+    networks:
+      - microservices-net
+    depends_on:
+      - eureka-server
+      - mongodb
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/coursedb
+      - SPRING_APPLICATION_NAME=course-service
+      - SPRING_CLOUD_DISCOVERY_ENABLED=true
+
+  associate-service:
+    build:
+      context: "./AssociateService"
+      dockerfile: Dockerfile
+    container_name: associate-service
+    networks:
+      - microservices-net
+    ports:
+      - "9098:9098"
+    depends_on:
+      - eureka-server
+      - mongodb
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/associatedb
+      - SPRING_CLOUD_DISCOVERY_ENABLED=true
+      - SPRING_APPLICATION_NAME=associate-service
+
+  admission-service:
+    build:
+      context: "./AdmissionService"
+      dockerfile: Dockerfile
+    container_name: admission-service
+    networks:
+      - microservices-net
+    ports:
+      - "9093:9093"
+    depends_on:
+      - eureka-server
+      - course-service
+      - associate-service
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/admissiondb
+      - SPRING_APPLICATION_NAME=admission-service
+      - SPRING_CLOUD_DISCOVERY_ENABLED=true
+
+networks:
+  microservices-net:
+    driver: bridge
