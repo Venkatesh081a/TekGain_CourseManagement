@@ -9,6 +9,8 @@ services:
     networks:
       - microservices-net
     restart: always
+    volumes:
+      - mongodb_data:/data/db
 
   eureka-server:
     build:
@@ -100,6 +102,9 @@ services:
       - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/admissiondb
       - SPRING_APPLICATION_NAME=admission-service
       - SPRING_CLOUD_DISCOVERY_ENABLED=true
+
+volumes:
+  mongodb_data:
 
 networks:
   microservices-net:

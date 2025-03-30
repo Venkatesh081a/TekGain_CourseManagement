@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway
+  template:
+    metadata:
+      labels:
+        app: gateway
+    spec:
+      automountServiceAccountToken: false
+      initContainers:
+        - name: wait-for-eureka
+          image: busybox
+          command:
+            [
+              "sh",
+              "-c",
+              'until nc -z eureka-server-service 8761; do echo "Waiting for Eureka"; sleep 5; done;',
+            ]
+      containers:
+        - name: gateway-service
+          image: venky081/java-gateway-service:v1
+          ports:
+            - containerPort: 9090
+          env:
+            - name: SPRING_APPLICATION_NAME
+              value: "gateway"
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: "http://eureka-server-service:8761/eureka"
+            - name: SPRING_CLOUD_DISCOVERY_ENABLED
+              value: "true"
+            - name: EUREKA_INSTANCE_HOSTNAME
+              value: "gateway"
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "250m"
+              memory: "256Mi"

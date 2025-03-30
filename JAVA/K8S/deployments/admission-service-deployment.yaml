@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admission-service-deployment
+spec:
+  selector:
+    matchLabels:
+      app: admission-service
+  template:
+    metadata:
+      labels:
+        app: admission-service
+    spec:
+      automountServiceAccountToken: false
+      initContainers:
+        - name: wait-for-eureka
+          image: busybox
+          command:
+            [
+              "sh",
+              "-c",
+              'until nc -z eureka-server-service 8761; do echo "Waiting for Eureka"; sleep 5; done;',
+            ]
+        - name: wait-for-course
+          image: busybox
+          command:
+            [
+              "sh",
+              "-c",
+              'until nc -z course-service 9097; do echo "Waiting for Course service"; sleep 5; done;',
+            ]
+        - name: wait-for-associate
+          image: busybox
+          command:
+            [
+              "sh",
+              "-c",
+              'until nc -z associate-service 9098; do echo "Waiting for Associate service"; sleep 5; done;',
+            ]
+      containers:
+        - name: admission-service
+          image: venky081/java-admission-service:v2
+          ports:
+            - containerPort: 9093
+          env:
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: "http://eureka-server-service:8761/eureka"
+            - name: SPRING_DATA_MONGODB_URI
+              value: "mongodb://mongodb:27017/admissiondb"
+            - name: SPRING_APPLICATION_NAME
+              value: "admission-service"
+            - name: EUREKA_INSTANCE_HOSTNAME
+              value: "admission-service"
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+      restartPolicy: Always

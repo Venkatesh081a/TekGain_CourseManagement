@@ -37,11 +37,11 @@ public class AdmissionServiceImpl implements IAdmissionService {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		HttpEntity<String> entity = new HttpEntity<String>(headers);
-		String associateUrl = "http://GATEWAY/associate/viewAssociate/" + associateId;
+		String associateUrl = "lb://GATEWAY/associate/viewAssociate/" + associateId;
 		ResponseEntity<Associate> associate = restTemplate.exchange(associateUrl, HttpMethod.GET, entity,
 				Associate.class);
 		Associate associateResponse = associate.getBody();
-		String courseUrl = "http://GATEWAY/courses/course/viewByCourseId/" + courseId;
+		String courseUrl = "lb://GATEWAY/courses/course/viewByCourseId/" + courseId;
 		ResponseEntity<Course> course = restTemplate.exchange(courseUrl, HttpMethod.GET, entity, Course.class);
 		Course courseResponse = course.getBody();
 

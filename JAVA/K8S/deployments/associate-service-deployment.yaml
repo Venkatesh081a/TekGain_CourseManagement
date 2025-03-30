@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: associate-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: associate-service
+  template:
+    metadata:
+      labels:
+        app: associate-service
+    spec:
+      automountServiceAccountToken: false
+      initContainers:
+        - name: wait-for-eureka
+          image: busybox
+          command:
+            [
+              "sh",
+              "-c",
+              'until nc -z eureka-server-service 8761; do echo "Waiting for Eureka"; sleep 5; done;',
+            ]
+
+        - name: wait-for-mongodb
+          image: busybox
+          command:
+            [
+              "sh",
+              "-c",
+              'until nc -z mongodb 27017; do echo "Waiting for MongoDB"; sleep 5; done;',
+            ]
+      containers:
+        - name: associate-service
+          image: venky081/java-associate-service:v1
+          ports:
+            - containerPort: 9098
+          env:
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: "http://eureka-server-service:8761/eureka"
+            - name: SPRING_DATA_MONGODB_URI
+              value: "mongodb://mongodb:27017/associatedb"
+            - name: SPRING_APPLICATION_NAME
+              value: "associate-service"
+            - name: EUREKA_INSTANCE_HOSTNAME
+              value: "associate-service"
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+      restartPolicy: Always
