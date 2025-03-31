@@ -157,15 +157,6 @@ This setup provides a **scalable and resilient Course Management System** using 
 - **Helm Charts** for better manageability.
 - **Prometheus & Grafana** for monitoring.
 - **Istio Service Mesh** for observability and security.
-
----
-
-## 📜 License
-This project is licensed under the [MIT License](LICENSE).
-
-## 🙌 Contributing
-Contributions are welcome! Feel free to submit a pull request or open an issue.
-
 ---
 
 ### **Happy Coding! 🚀**
