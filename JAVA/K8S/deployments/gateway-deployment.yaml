@@ -27,15 +27,9 @@ spec:
           image: venky081/java-gateway-service:v1
           ports:
             - containerPort: 9090
-          env:
-            - name: SPRING_APPLICATION_NAME
-              value: "gateway"
-            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
-              value: "http://eureka-server-service:8761/eureka"
-            - name: SPRING_CLOUD_DISCOVERY_ENABLED
-              value: "true"
-            - name: EUREKA_INSTANCE_HOSTNAME
-              value: "gateway"
+          envFrom:
+            - configMapRef:
+                name: gateway-config
           resources:
             limits:
               cpu: "500m"

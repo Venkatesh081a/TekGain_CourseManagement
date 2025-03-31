@@ -1,0 +1,10 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: course-config
+  namespace: default
+data:
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka-server-service:8761/eureka"
+  SPRING_DATA_MONGODB_URI: "mongodb://mongodb:27017/coursedb"
+  SPRING_APPLICATION_NAME: "course-service"
+  EUREKA_INSTANCE_HOSTNAME: "course-service"

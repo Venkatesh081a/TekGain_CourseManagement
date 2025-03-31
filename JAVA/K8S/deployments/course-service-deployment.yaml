@@ -36,15 +36,9 @@ spec:
           image: venky081/java-course-service:v1
           ports:
             - containerPort: 9097
-          env:
-            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
-              value: "http://eureka-server-service:8761/eureka"
-            - name: SPRING_DATA_MONGODB_URI
-              value: "mongodb://mongodb:27017/coursedb"
-            - name: SPRING_APPLICATION_NAME
-              value: "course-service"
-            - name: EUREKA_INSTANCE_HOSTNAME
-              value: "course-service"
+          envFrom:
+            - configMapRef:
+                name: course-config
           resources:
             limits:
               cpu: "500m"

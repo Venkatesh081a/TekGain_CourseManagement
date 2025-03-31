@@ -1,0 +1,10 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: gateway-config
+  namespace: default
+data:
+  SPRING_APPLICATION_NAME: "gateway"
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka-server-service:8761/eureka"
+  SPRING_CLOUD_DISCOVERY_ENABLED: "true"
+  EUREKA_INSTANCE_HOSTNAME: "gateway"

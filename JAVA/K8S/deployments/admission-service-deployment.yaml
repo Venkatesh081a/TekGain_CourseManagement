@@ -42,15 +42,9 @@ spec:
           image: venky081/java-admission-service:v2
           ports:
             - containerPort: 9093
-          env:
-            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
-              value: "http://eureka-server-service:8761/eureka"
-            - name: SPRING_DATA_MONGODB_URI
-              value: "mongodb://mongodb:27017/admissiondb"
-            - name: SPRING_APPLICATION_NAME
-              value: "admission-service"
-            - name: EUREKA_INSTANCE_HOSTNAME
-              value: "admission-service"
+          envFrom:
+            - configMapRef:
+                name: admission-config
           resources:
             limits:
               cpu: "500m"
