@@ -1,173 +1,172 @@
-Course Management System - Kubernetes Deployment
+# Course Management System - Kubernetes Deployment
 
-Overview
+## Overview
+This project sets up a **Course Management System** using **Spring Boot Microservices** deployed in **Kubernetes**. The system consists of the following components:
 
-This project sets up a Course Management System using Spring Boot Microservices deployed in Kubernetes. The system includes multiple services such as:
+- **Eureka Server** – Service discovery for microservices.
+- **Spring Cloud Gateway** – API gateway for routing requests.
+- **Course Service** – Manages course-related operations.
+- **Associate Service** – Handles associate-related operations.
+- **Admission Service** – Manages student admissions.
+- **MongoDB** – Database used by microservices.
+- **NGINX Ingress Controller** – Manages external access to services.
 
-Eureka Server for service discovery
+---
 
-Spring Cloud Gateway as an API gateway
+## Architecture
+The application follows a **microservices architecture**, where each service runs in its own **Kubernetes pod** and communicates via REST APIs.
 
-Course Service for managing course-related operations
+*(Replace with actual architecture diagram image)*
 
-Associate Service for handling associates
+---
 
-Admission Service for handling course admissions
-
-MongoDB as the database
-
-Nginx Ingress Controller for external access
-
-Architecture
-
-The application follows a microservices architecture, where each service is deployed as a separate pod inside Kubernetes.
-
-(Replace with actual image link)
-
-Prerequisites
-
+## Prerequisites
 Ensure you have the following installed:
 
-Docker
+- [Docker](https://www.docker.com/)
+- [Kubernetes (kubectl)](https://kubernetes.io/docs/tasks/tools/)
+- [Minikube](https://minikube.sigs.k8s.io/docs/) or a Kubernetes cluster
+- [Helm](https://helm.sh/) (for NGINX Ingress)
+- [Skaffold](https://skaffold.dev/) *(optional for CI/CD automation)*
 
-Kubernetes (kubectl)
+---
 
-Minikube or a Kubernetes cluster
+## Services and Components
+### 📌 **Eureka Server**
+- **Purpose:** Handles service discovery, allowing microservices to dynamically register themselves.
+- **Deployment File:** `eureka-server-deployment.yaml`
+- **Service File:** `eureka-server-service.yaml`
 
-Helm (for nginx-ingress)
+### 📌 **Spring Cloud Gateway**
+- **Purpose:** Acts as an entry point for all requests and routes them to the appropriate services.
+- **Deployment File:** `gateway-deployment.yaml`
+- **Service File:** `gateway-service.yaml`
+- **Ingress File:** `gateway-ingress.yaml`
 
-Skaffold (optional for CI/CD automation)
+### 📌 **Course Service**
+- **Purpose:** Manages courses and their details.
+- **Deployment File:** `course-service-deployment.yaml`
+- **Service File:** `course-service.yaml`
 
-Services and Components
+### 📌 **Associate Service**
+- **Purpose:** Handles associates who enroll in courses.
+- **Deployment File:** `associate-service-deployment.yaml`
+- **Service File:** `associate-service.yaml`
 
-1. Eureka Server
+### 📌 **Admission Service**
+- **Purpose:** Manages student admissions to courses.
+- **Deployment File:** `admission-service-deployment.yaml`
+- **Service File:** `admission-service.yaml`
 
-Handles service discovery, allowing microservices to dynamically register themselves.
+### 📌 **MongoDB**
+- **Purpose:** Database used by microservices.
+- **Deployment File:** `mongodb-deployment.yaml`
+- **Service File:** `mongodb-service.yaml`
 
-Deployment: eureka-server-deployment.yaml
+---
 
-Service: eureka-server-service.yaml
-
-2. Spring Cloud Gateway
-
-Acts as an entry point for all requests and routes them to the appropriate services.
-
-Deployment: gateway-deployment.yaml
-
-Service: gateway-service.yaml
-
-Ingress: gateway-ingress.yaml
-
-3. Course Service
-
-Manages courses and their details.
-
-Deployment: course-service-deployment.yaml
-
-Service: course-service.yaml
-
-4. Associate Service
-
-Handles associates who enroll in courses.
-
-Deployment: associate-service-deployment.yaml
-
-Service: associate-service.yaml
-
-5. Admission Service
-
-Manages student admissions to courses.
-
-Deployment: admission-service-deployment.yaml
-
-Service: admission-service.yaml
-
-6. MongoDB
-
-The database used by microservices.
-
-Deployment: mongodb-deployment.yaml
-
-Service: mongodb-service.yaml
-
-Kubernetes Setup
-
-Step 1: Start Minikube (if using Minikube)
-
+## Kubernetes Setup
+### 1️⃣ Start Minikube *(if using Minikube)*
+```sh
 minikube start
+```
 
-Step 2: Install Nginx Ingress Controller
-
+### 2️⃣ Install NGINX Ingress Controller
+```sh
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+```
 
-Step 3: Deploy Services
-
+### 3️⃣ Deploy Services
+```sh
 kubectl apply -f k8s/
+```
+This command deploys all services and their dependencies.
 
-This will deploy all services and their dependencies.
-
-Step 4: Verify Deployments
-
+### 4️⃣ Verify Deployments
+```sh
 kubectl get pods
 kubectl get services
 kubectl get ingress
+```
 
-Step 5: Access the Application
-
-Add the following entry to /etc/hosts if using Minikube:
-
+### 5️⃣ Access the Application
+#### ➤ **If using Minikube:**
+Add the following entry to `/etc/hosts`:
+```sh
 127.0.0.1 localhost
-
-Then, access the application via:
-
+```
+Access services via:
+```sh
 curl http://localhost/courses/course/viewAll
 curl http://localhost/associate/viewAll
 curl http://localhost/admission/viewAll
+```
 
-or Do port-forwarding
-
+#### ➤ **If using port-forwarding:**
+Run the following command:
+```sh
 kubectl port-forward --namespace ingress-nginx service/ingress-nginx-controller 8090:80
-
-then access applications on local host 8090
-
+```
+Now, access services via:
+```sh
 http://localhost:8090/courses/course/viewAll
 http://localhost:8090/associate/viewAll
 http://localhost:8090/admission/viewAll
+```
 
-Troubleshooting
+---
 
-Issue: 404 Not Found in Ingress
-
-Ensure the Ingress is correctly configured:
-
+## Troubleshooting
+### ❌ **Issue: 404 Not Found in Ingress**
+✅ Ensure the Ingress is correctly configured:
+```sh
 kubectl describe ingress gateway-ingress
-
-Check if the gateway service is running:
-
+```
+✅ Check if the gateway service is running:
+```sh
 kubectl get svc | grep gateway
+```
+✅ If paths are incorrect, verify the **rewrite-target** annotation in `gateway-ingress.yaml`.
 
-If paths are incorrect, verify the rewrite-target annotation in the gateway-ingress.yaml file.
-
-Issue: Services not registering in Eureka
-
-Restart services to force re-registration:
-
+### ❌ **Issue: Services Not Registering in Eureka**
+✅ Restart services to force re-registration:
+```sh
 kubectl rollout restart deployment gateway-deployment
-
-Check Eureka logs:
-
+```
+✅ Check Eureka logs:
+```sh
 kubectl logs -l app=eureka-server-service
+```
 
-Cleanup
+---
 
+## Cleanup
 To remove all resources:
-
+```sh
 kubectl delete -f k8s/
-
+```
 To stop Minikube:
-
+```sh
 minikube stop
+```
 
-Conclusion
+---
 
-This setup provides a scalable and resilient Course Management System using Kubernetes. Additional improvements can include Helm charts, Prometheus monitoring, and Istio service mesh for better observability and security.
+## Conclusion
+This setup provides a **scalable and resilient Course Management System** using Kubernetes. Future improvements can include:
+- **Helm Charts** for better manageability.
+- **Prometheus & Grafana** for monitoring.
+- **Istio Service Mesh** for observability and security.
+
+---
+
+## 📜 License
+This project is licensed under the [MIT License](LICENSE).
+
+## 🙌 Contributing
+Contributions are welcome! Feel free to submit a pull request or open an issue.
+
+---
+
+### **Happy Coding! 🚀**
+
